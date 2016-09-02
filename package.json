@@ -1,0 +1,59 @@
+{
+  "name": "mean-starter-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test"      : "echo \"Error: no test specified\" && exit 1",
+    "start"     : "./node_modules/.bin/nodemon ./server.js",
+    "gulp"      : "gulp",
+    "bower"     : "bower",
+    "karma-cli" : "karma-cli",
+    "karma"     : "karma"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RobbyBugatti/mean-starter-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RobbyBugatti/mean-starter-project/issues"
+  },
+  "homepage": "https://github.com/RobbyBugatti/mean-starter-project#readme",
+  "devDependencies": {
+    "angular": "^1.5.8",
+    "angular-mocks": "^1.5.8",
+    "angular-ui-router": "^0.3.1",
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-count": "^0.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.0.0",
+    "gulp-watch": "^4.3.9",
+    "jasmine-core": "^2.5.0",
+    "karma": "^1.2.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jasmine": "^1.0.2",
+    "mocha": "^3.0.2",
+    "mockery": "^1.7.0",
+    "sinon": "^1.17.5"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.3.0",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "express-request-id": "^1.1.0",
+    "jsonwebtoken": "^7.1.9",
+    "karma-cli": "^1.0.1",
+    "mongo": "^0.1.0",
+    "mongoose": "^4.5.10",
+    "morgan": "^1.7.0",
+    "nodemon": "^1.10.2",
+    "path": "^0.12.7",
+    "request": "^2.74.0",
+    "socket.io": "^1.4.8",
+    "underscore": "^1.8.3"
+  }
+}
