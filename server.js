@@ -1,31 +1,16 @@
-// var express     = require('express'),
-//     app         = express(),
-//     http        = require('http').Server(app),
-//     _           = require('underscore'),
-//     router      = express.Router(),
-//     io          = require('socket.io')(http);
-//
-// // Set statc serving directories
-// app.use( express.static( __dirname + '/public' ) );
-// app.use( '/vendor', express.static(  __dirname + '/bower_components' ) );
-//
-// app.get('*', function(req, res, next) {
-//     console.log("Serving request at index.html");
-//     res.send("Hello World from "+process.env.HOSTNAME);
-// })
-// io.on('connection', function(socket) {
-//     console.log("New socket connected");
-// })
-//
-// http.listen(3000, function() {
-//     console.log("Server listening on port 3000");
-// })
+var express     = require('express');
+var app         = express();
+var router      = express.Router();
+var bodyParser  = require('body-parser');
+var morgan      = require('morgan');
+var path        = require('path');
+var fs          = require('fs');
+var Link        = require('./app/models/Link.js');
+var mongoose    = require('mongoose');
+var redis       = require('redis');
 
-var express = require('express'),
-    app = express(),
-    bodyParser = require('body-parser'),
-    morgan = require('morgan'),
-    path = require('path');
+mongoose.connect(process.env.DATABASE_URL);
+var client = redis.createClient('6379', 'redis');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -38,12 +23,56 @@ app.use(function(req, res, next) {
 });
 
 app.use(morgan('dev'));
-
+// app.use(require('./app/middleware/jwt.js')());
+app.use('/api', require('./app/middleware/api-auth.js')());
+app.get('/', function(req, res) { res.sendFile(path.join(__dirname + '/public/index.html')); });
 app.use(express.static(__dirname + '/public'));
+function recursiveRoutes(folderName) {
+    fs.readdirSync(folderName).forEach(function(file) {
 
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname + '/public/index.html'));
-});
+        var fullName = path.join(folderName, file);
+        var stat = fs.lstatSync(fullName);
+
+        if (stat.isDirectory()) {
+            recursiveRoutes(fullName);
+        } else if (file.toLowerCase().indexOf('.js')) {
+            require('./' + fullName)(router, client);
+        }
+    });
+}
+
+recursiveRoutes('./app/routes');
+
+
+app.use('/', router);
+
+app.get('/:slug', function(req, res) {
+    Link.findOne({slug: req.params.slug}, function(err, link) {
+        if(err)   return res.send("404 (Not Found)");
+        if(!link) return res.send(404).json({error:"Not Found"});
+        link.getRedirectUrl(req.query, function(err, url) {
+            if(err) return res.send("500 (Server Error)");
+            res.writeHead(302, {
+                'Location': url
+            });
+            res.end();
+            // Finally, we log the visit
+            link.trackVisit(function(err) {
+                if(err) {
+                    console.log(err);
+                } else {
+                    client.set(req.params.slug, JSON.stringify(link), function(err, reply) {
+                        if(err) {
+                            console.log(err);
+                        } else {
+                            console.log("Visit recorded");
+                        }
+                    });
+                }
+            })
+        })
+    })
+})
 
 app.listen(3000);
-console.log('meet-irl is running on 8080');
+console.log('Application is running on 3000');

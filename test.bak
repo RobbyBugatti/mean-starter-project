@@ -1,0 +1,198 @@
+[
+    {
+        "Id": "0b1e6f90e663ca7a474a711c9cabf91e5c99864dedb4304d151555e462fa5354",
+        "Created": "2016-08-22T20:38:39.481780085Z",
+        "Path": "/bin/logspout",
+        "Args": [
+            "syslog+tls://logs4.papertrailapp.com:17745"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 26071,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2016-08-22T20:38:39.659700731Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:6c7afda380b21c90161d54a1f6d407f17d015efc9fc0b7b8cab7c3fdb6d96513",
+        "ResolvConfPath": "/var/lib/docker/containers/0b1e6f90e663ca7a474a711c9cabf91e5c99864dedb4304d151555e462fa5354/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/0b1e6f90e663ca7a474a711c9cabf91e5c99864dedb4304d151555e462fa5354/hostname",
+        "HostsPath": "/var/lib/docker/containers/0b1e6f90e663ca7a474a711c9cabf91e5c99864dedb4304d151555e462fa5354/hosts",
+        "LogPath": "/var/lib/docker/containers/0b1e6f90e663ca7a474a711c9cabf91e5c99864dedb4304d151555e462fa5354/0b1e6f90e663ca7a474a711c9cabf91e5c99864dedb4304d151555e462fa5354-json.log",
+        "Name": "/fervent_lalande",
+        "RestartCount": 0,
+        "Driver": "aufs",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": [
+                "/var/run/docker.sock:/var/run/docker.sock"
+            ],
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "default",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "always",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "CapAdd": null,
+            "CapDrop": null,
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "StorageOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": null,
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DiskQuota": 0,
+            "KernelMemory": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": -1,
+            "OomKillDisable": false,
+            "PidsLimit": 0,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "BlkioIOps": 0,
+            "BlkioBps": 0,
+            "SandboxSize": 0
+        },
+        "GraphDriver": {
+            "Name": "aufs",
+            "Data": null
+        },
+        "Mounts": [
+            {
+                "Source": "/var/run/docker.sock",
+                "Destination": "/var/run/docker.sock",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Name": "64e354822c7e7e15877140538a8d905356a9a57225e1c33bed85ad0a152f9641",
+                "Source": "/var/lib/docker/volumes/64e354822c7e7e15877140538a8d905356a9a57225e1c33bed85ad0a152f9641/_data",
+                "Destination": "/mnt/routes",
+                "Driver": "local",
+                "Mode": "",
+                "RW": true,
+                "Propagation": ""
+            }
+        ],
+        "Config": {
+            "Hostname": "0b1e6f90e663",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "80/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "SYSLOG_HOSTNAME=pharm-slave-adbeagle-02",
+                "SYSLOG_TAG={{.Container.Config.Hostname}}",
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "syslog+tls://logs4.papertrailapp.com:17745"
+            ],
+            "Image": "gliderlabs/logspout",
+            "Volumes": {
+                "/mnt/routes": {}
+            },
+            "WorkingDir": "",
+            "Entrypoint": [
+                "/bin/logspout"
+            ],
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "5297df025eb19cf4ff64bee890b1b2ae95be60cab3b6a60e7040c875d7a36e4d",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {
+                "80/tcp": null
+            },
+            "SandboxKey": "/var/run/docker/netns/5297df025eb1",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "15d43c93d3d505256ed8b231493ab28dd7c18f4431a8cf6da1a5eb5f82d5257b",
+            "Gateway": "172.17.0.1",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "172.17.0.2",
+            "IPPrefixLen": 16,
+            "IPv6Gateway": "",
+            "MacAddress": "02:42:ac:11:00:02",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "578f368b050810b7ae6f636091e268d0f16c39f5a0b73371f2cf25d0a588ef5c",
+                    "EndpointID": "15d43c93d3d505256ed8b231493ab28dd7c18f4431a8cf6da1a5eb5f82d5257b",
+                    "Gateway": "172.17.0.1",
+                    "IPAddress": "172.17.0.2",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:11:00:02"
+                }
+            }
+        }
+    }
+]
+
