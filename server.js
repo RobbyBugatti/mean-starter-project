@@ -9,7 +9,10 @@ var Link        = require('./app/models/Link.js');
 var mongoose    = require('mongoose');
 var redis       = require('redis');
 
-mongoose.connect(process.env.DATABASE_URL);
+if(mongoose.connection.readyState === 0) {
+    mongoose.connect(process.env.DATABASE_URL);
+}
+
 var client = redis.createClient('6379', 'redis');
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -47,9 +50,10 @@ recursiveRoutes('./app/routes');
 app.use('/', router);
 
 app.get('/:slug', function(req, res) {
+    console.log("Random slug attempt");
     Link.findOne({slug: req.params.slug}, function(err, link) {
         if(err)   return res.send("404 (Not Found)");
-        if(!link) return res.send(404).json({error:"Not Found"});
+        if(!link) return res.status(404).json({error:"Not Found"});
         link.getRedirectUrl(req.query, function(err, url) {
             if(err) return res.send("500 (Server Error)");
             res.writeHead(302, {
@@ -74,5 +78,6 @@ app.get('/:slug', function(req, res) {
     })
 })
 
-app.listen(3000);
-console.log('Application is running on 3000');
+var server = app.listen(3000);
+
+module.exports = server;

@@ -12,7 +12,10 @@ var linkSchema = new mongoose.Schema({
     created_at  : Date,
     updated_at  : Date,
     user_id     : { type: String,   default: 0 },
-    analytics   : mongoose.Schema.Types.Mixed,
+    analytics   : {
+        total : { type: Number, default: 0 },
+        daily : mongoose.Schema.Types.Mixed
+    }
 });
 
 linkSchema.pre('validate', function(next) {
@@ -21,6 +24,12 @@ linkSchema.pre('validate', function(next) {
     if(!this.slug) this.slug = this.constructor.generateSlug();
     this.updated_at = current_date;
     if(!this.created_at) this.created_at = current_date;
+    if(!this.analytics) {
+        this.analytics = {
+            total: 0,
+            daily:  {}
+        }
+    }
     link.constructor.fetchTitleFromUrl(link.long_url, function(err, title) {
         link.page_title = link.long_url;
         if(title) link.page_title = title;

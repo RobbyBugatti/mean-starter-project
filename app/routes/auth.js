@@ -23,15 +23,15 @@ module.exports = function(app) {
                 case reasons.PASSWORD_INCORRECT:
                     // note: these cases are usually treated the same - don't tell
                     // the user *why* the login failed, only that it did
-                    return res.code(400).json({error: "Invalid Login"});
+                    return res.status(400).json({error: "Invalid Login"});
                     break;
                 case reasons.MAX_ATTEMPTS:
                     // send email or otherwise notify user that account is
                     // temporarily locked
-                    return res.code(400).json({error: "Your account is currently locked. Please try again later"});
+                    return res.status(400).json({error: "Your account is currently locked. Please try again later"});
                     break;
                 default:
-                    return res.code(500).json({error: "An unexpected error occured"});
+                    return res.status(500).json({error: "An unexpected error occured"});
             }
         })
     });
@@ -56,11 +56,11 @@ module.exports = function(app) {
 
     // POST '/forgot_password'
     app.post('/forgot_password', function(req, res, next) {
-        return res.code(404).json({error: "Not Found"});
+        return res.status(404).json({error: "Not Found"});
     });
 
     // POST '/reset_password'
     app.post('/reset_password', function(req, res, next) {
-        return res.code(404).json({error: "Not Found"});
+        return res.status(404).json({error: "Not Found"});
     });
 };
